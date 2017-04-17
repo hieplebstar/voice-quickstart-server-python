@@ -234,9 +234,9 @@ def callLog():
     if server_record:
         userCallerNumber = server_record[0]['clientNum']
         bookingStartDate = server_record[0]['startDate']
-        started_after=datetime.datetime.strptime(bookingStartDate, '%d-%m-%Y').date()
+        booking_start=datetime.datetime.strptime(bookingStartDate, '%d-%m-%Y').date()
     result = []
-    for call in client.calls.list(to=userCallerNumber, started_after):
+    for call in client.calls.list(to=userCallerNumber, started_after=booking_start):
         if call.direction != 'inbound':
             tmp = {
                 'contact': call.from_formatted,
@@ -246,7 +246,7 @@ def callLog():
                 'starttime': str(call.start_time),
                 }
             result.append(tmp)
-    for call in client.calls.list(from_=userCallerNumber,started_after):
+    for call in client.calls.list(from_=userCallerNumber,started_after=booking_start):
         if call.direction != 'inbound':
             tmp = {
                 'type': 'Outbox',
