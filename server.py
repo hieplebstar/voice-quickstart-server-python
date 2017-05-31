@@ -139,7 +139,7 @@ def outgoing():
                 userCallerNumber = server_record[0]['clientNum']
 
             resp.dial(callerId=userCallerNumber,
-                      action='https://pd2gvoice.herokuapp.com/call_completed'
+                      action='https://pd2gvoice.herokuapp.com/call_completed', record=True
                       ).number(to)
 
             # except Exception, e:
